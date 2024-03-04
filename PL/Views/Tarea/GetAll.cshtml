@@ -1,0 +1,46 @@
+﻿@model ML.Usuario
+@{
+    ViewData["Title"] = "GetAll";
+}
+<div class="flex-column">
+    <h1 class="text-center"> Tareas</h1>
+</div>
+@if (Model == null)
+{
+    <div class="alert alert-warning" role="alert">
+        ocurrio un error!
+    </div>
+}
+else
+{
+    <div class=" table-responsive">
+        <table class="table table-dark table-hover" id="tabla">
+            <thead class="table-secondary">
+                <tr class="text-center">
+                    <th>IdUsuario</th>
+                    <th>Nombre</th>
+                    <th>Titulo</th>
+                    <th>Descripcion</th>
+                    <th>FechaVencimiento</th>
+                    <th>Estado</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Usuario usuario in Model.Usuarios)
+                {
+                    <tr>
+                        <td>@usuario.IdUsuario</td>
+                        <td>@usuario.Nombre</td>
+                        <td>@usuario.Tarea.Titulo</td>
+                        <td>@usuario.Tarea.Descripcion</td>
+                        <td>@usuario.Tarea.FechaVencimiento</td>
+                        <td>@usuario.Status.Estado</td>
+                        <td><a href="@Url.Action("Delete", "Tarea", new{IdUsuario = usuario.IdUsuario})" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
